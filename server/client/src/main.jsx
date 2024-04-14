@@ -1,9 +1,16 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './components/App.jsx'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./components/App.jsx";
+import { Provider } from "react-redux";
+import { createStore, applyMiddleware } from "redux";
+import reducers from "./reducers";
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-)
+const store = createStore(reducers, {}, applyMiddleware());
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+    <React.StrictMode>
+        <Provider store={store}>
+            <App />
+        </Provider>
+    </React.StrictMode>
+);
