@@ -2,7 +2,20 @@ import { Component } from "react";
 
 class Header extends Component {
     render() {
-        return <h1>class header</h1>;
+        return (
+            <nav>
+                <div className="nav-wrapper">
+                    <a href="#" className="left brand-logo">
+                        Emaily
+                    </a>
+                    <ul className="right">
+                        <li>
+                            <a>Login With Google</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        );
     }
 }
 
