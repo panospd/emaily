@@ -40,16 +40,22 @@ const CheckoutForm = () => {
     return (
         <form id="payment-form" onSubmit={handleSubmit}>
             <PaymentElement />
-            <button
-                className="waves-effect waves-light btn"
-                disabled={isProcessing}
-                style={{ marginTop: "1em" }}
-            >
-                Submit
-            </button>
-            <span style={{ marginLeft: "0.5em" }} id="button-text">
-                {isProcessing ? "Processing ..." : "Pay now"}
-            </span>
+            <div className="row" style={{ marginTop: "0.5em" }}>
+                <button
+                    className="waves-effect waves-light btn"
+                    disabled={isProcessing}
+                >
+                    Submit
+                </button>
+                <span
+                    style={{
+                        paddingLeft: "0.5em",
+                    }}
+                    id="button-text"
+                >
+                    {isProcessing ? "Processing ..." : "Pay now"}
+                </span>
+            </div>
         </form>
     );
 };
