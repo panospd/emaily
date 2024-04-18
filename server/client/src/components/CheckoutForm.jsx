@@ -4,8 +4,10 @@ import {
     PaymentElement,
 } from "@stripe/react-stripe-js";
 import { useState } from "react";
+import { connect } from "react-redux";
+import * as actions from "../actions";
 
-const CheckoutForm = () => {
+const CheckoutForm = (props) => {
     const stripe = useStripe();
     const elements = useElements();
 
@@ -19,19 +21,22 @@ const CheckoutForm = () => {
 
         setIsProcessing(true);
 
-        const { error, paymentIntent } = await stripe.confirmPayment({
-            elements,
-            confirmParams: {
-                return_url: `${window.location.origin}`,
-            },
-        });
+        const { error: submitError } = await elements.submit();
+        if (submitError) {
+            setMessage(submitError.message);
+            setIsProcessing(false);
+            return;
+        }
+
+        const { error, confirmationToken } =
+            await stripe.createConfirmationToken({
+                elements,
+            });
 
         if (error) {
             setMessage(error.message);
-            console.log(message);
-        } else if (paymentIntent && paymentIntent.status === "succeeded") {
-            setMessage("Payment status: " + paymentIntent.status);
-            console.log(message);
+        } else {
+            props.confirmPayment(confirmationToken.id);
         }
 
         setIsProcessing(false);
@@ -60,4 +65,4 @@ const CheckoutForm = () => {
     );
 };
 
-export default CheckoutForm;
+export default connect(null, actions)(CheckoutForm);

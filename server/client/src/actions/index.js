@@ -6,3 +6,10 @@ export const fetchUser = () => async (dispatch) => {
 
     dispatch({ type: FETCH_USER, payload: res.data });
 };
+
+export const confirmPayment = (confirmationToken) => async (dispatch) => {
+    console.log("confirmation token", confirmationToken);
+    const res = await axios.post("api/payment/confirm", { confirmationToken });
+    console.log(res);
+    dispatch({ type: FETCH_USER, payload: res.data });
+};
