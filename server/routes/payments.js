@@ -15,10 +15,10 @@ module.exports = (app) => {
                 confirmation_token: req.body.confirmationToken,
             });
 
-            res.send({
-                clientSecret: intent.client_secret,
-                status: intent.status,
-            });
+            req.user.credits += 5;
+            const user = await req.user.save();
+
+            res.send(user);
         } catch (e) {
             return res.status(400).send({
                 error: e.message,

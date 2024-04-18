@@ -24,7 +24,7 @@ function Payment(props) {
 
     return (
         <>
-            <h1>React stripe and the payment element</h1>
+            <h1>$5 dollars for 5 credits</h1>
             {stripePromise && (
                 <Elements stripe={stripePromise} options={options}>
                     <CheckoutForm />
