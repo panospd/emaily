@@ -2,6 +2,10 @@ const stripe = require("../services/stripe");
 
 module.exports = (app) => {
     app.post("/api/payment/confirm", async (req, res) => {
+        if (!req.user) {
+            return res.status(401).send({ error: "You must log in!" });
+        }
+
         try {
             console.log("creating payment intent");
             const intent = await stripe.paymentIntents.create({
