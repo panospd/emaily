@@ -1,8 +1,6 @@
 import { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import Payment from "./Payment";
-
 class Header extends Component {
     renderContent() {
         switch (this.props.auth) {
@@ -18,6 +16,9 @@ class Header extends Component {
                 return [
                     <li key={1}>
                         <Link to="/payments">Add Credits</Link>
+                    </li>,
+                    <li style={{ margin: "0 10px" }} key={3}>
+                        Credits: {this.props.auth.credits}
                     </li>,
                     <li key={2}>
                         <a href="/api/logout">Logout</a>

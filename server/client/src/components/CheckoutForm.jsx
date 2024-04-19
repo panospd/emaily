@@ -6,10 +6,12 @@ import {
 import { useState } from "react";
 import { connect } from "react-redux";
 import * as actions from "../actions";
+import { useHistory } from "react-router-dom";
 
 const CheckoutForm = (props) => {
     const stripe = useStripe();
     const elements = useElements();
+    const history = useHistory();
 
     const [message, setMessage] = useState(null);
     const [isProcessing, setIsProcessing] = useState(false);
@@ -40,6 +42,7 @@ const CheckoutForm = (props) => {
         }
 
         setIsProcessing(false);
+        history.push("/");
     };
 
     return (
